@@ -1,21 +1,43 @@
-# Minimize on Close add-on for Thunderbird
+# Minimize on Close Revamped
 
-An add-on to minimize Thunderbird when clicking on the close button. You can [download stable releases through addons.thunderbird.net](https://addons.thunderbird.net/thunderbird/addon/minimize-on-close/). Alternatively, binary builds for named versions are also available [on the releases page of this repository](https://github.com/rsjtdrjgfuzkfg/thunderbird-minimizeonclose/releases).
+**Minimize on Close Revamped** is a modern fork of the classic "Minimize on Close" add-on for Thunderbird. It ensures that clicking the window close button (X) minimizes Thunderbird to the tray/taskbar instead of closing the application.
 
+## 🚀 Key Features
 
-## Compatibility
+*   **Seamless Minimization**: Keeps Thunderbird running in the background when you close the main window.
+*   **Modern Compatibility**: Updated to support Thunderbird **128.0** and all future versions (Max Version: `*`).
+*   **Conflict-Free**: Renamed internal IDs and APIs to coexist peacefully with the original add-on if needed.
+*   **Zero Configuration**: Just install and it works.
 
-**This add-on officially supports the Extended Support Release (ESR) channel of Thunderbird.** For a seamless and stable user experience, compatibility updates are planned to land before each major ESR release. If you use the ESR release channel and have automatic updates enabled, Thunderbird will ensure that a compatible version is installed at any time.
+## 📦 Installation
 
-All other channels, including the new monthly "release" channel, do not receive official support. That said, pull requests that provide compatibility fixes for other versions are welcome, if they do not interfere with ESR releases.
+### From Add-ons Store
+(Coming soon to addons.thunderbird.net)
 
-To protect you and your data, regular releases of the add-on cannot be enabled on unsupported versions of Thunderbird. Advanced users that understand the risks involved may use unsupported builds that can be installed on newer versions of Thunderbird. As the name implies, unsupported builds do not receive any form of support from the add-on author and are not published as automatic updates. Do not open issues or otherwise ask the add-on author for support when using an unsupported build.
+### Manual Installation
+1.  Download the latest `.xpi` release from the releases page (or build it yourself).
+2.  Open Thunderbird.
+3.  Go to **Settings** > **Add-ons and Themes**.
+4.  Click the gear icon ⚙️ > **Install Add-on From File...**
+5.  Select the downloaded `.xpi` file.
 
-Beware: While unsupported builds may seemingly work as intended, incompatible changes in Thunderbird might affect some or all functionality of the add-on and may lead to severe issues, even beyond the add-on's scope. In extreme cases, using unsupported builds could lead to irrecoverable loss of data. If you do not understand the risks involved, don't have a tested and relieable backup strategy, or don't want the hassle of updating the add-on manually, you should use supported releases with an ESR version of Thunderbird.
+## 🛠️ Building from Source
 
+This project includes a PowerShell script for easy building on Windows.
 
-## Building
+1.  Clone the repository.
+2.  Run `build_xpi.ps1` in PowerShell.
+3.  The signed package will be created in the `dist/` folder.
 
-On a system with common unix tools installed, you can use `make` to create an xpi archive containing the add-on in the dist folder. For an unsupported build, use `make xpi-unsupported` instead.
+```powershell
+.\build_xpi.ps1
+```
 
-Alternatively, you can directly use the add-on from the `src` folder or pack that folder into an xpi yourself.
+## 📜 Credits & License
+
+This project is a fork of the original [Minimize on Close](https://github.com/rsjtdrjgfuzkfg/thunderbird-minimizeonclose) by `rsjtdrjgfuzkfg`.
+
+*   **Original Author**: rsjtdrjgfuzkfg
+*   **License**: Mozilla Public License 2.0 (MPL 2.0)
+
+Distributed under the MPL 2.0 license. See `LICENSE` for more information.

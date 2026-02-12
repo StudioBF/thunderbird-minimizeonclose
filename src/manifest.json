@@ -1,28 +1,36 @@
 {
   "manifest_version": 2,
-  "applications": {
+  "browser_specific_settings": {
     "gecko": {
-      "id": "minimizeonclose@rsjtdrjgfuzkfg.com",
+      "id": "minimize-on-close-revamped@custom",
       "strict_min_version": "128.0",
-      "strict_max_version": "140.*"
+      "strict_max_version": "*"
     }
   },
-  "name": "Minimize on Close",
-  "description": "Causes Thunderbird's main window to minimize instead of closing. You can still close Thunderbird through the menu.",
-  "version": "__BUILD_version__",
-  "author": "rsjtdrjgfuzkfg",
+  "name": "Minimize on Close Revamped",
+  "description": "Causes Thunderbird's main window to minimize instead of closing. Revamped for modern Thunderbird versions.",
+  "version": "1.0.0",
+  "author": "rsjtdrjgfuzkfg (Revamped by Fork)",
   "icons": {
     "64": "icon.png"
   },
   "background": {
-    "scripts": ["background.js"]
+    "scripts": [
+      "background.js"
+    ]
   },
   "experiment_apis": {
-    "ex_windows": {
+    "ex_windows_revamped": {
       "schema": "experiment.json",
       "parent": {
-        "scopes": ["addon_parent"],
-        "paths": [["ex_windows"]],
+        "scopes": [
+          "addon_parent"
+        ],
+        "paths": [
+          [
+            "ex_windows_revamped"
+          ]
+        ],
         "script": "experiment.js"
       }
     }

@@ -1,7 +1,7 @@
 const { ExtensionCommon } = ChromeUtils.importESModule(
-    "resource://gre/modules/ExtensionCommon.sys.mjs");
+  "resource://gre/modules/ExtensionCommon.sys.mjs");
 
-this.ex_windows = class extends ExtensionCommon.ExtensionAPI {
+this.ex_windows_revamped = class extends ExtensionCommon.ExtensionAPI {
   getAPI(context) {
     // Note: this implementation is unsafe if multiple add-ons would lock the
     // same window and unlock in a different order. Fixing this is not
@@ -12,33 +12,33 @@ this.ex_windows = class extends ExtensionCommon.ExtensionAPI {
     let listeners = []; // objects with 'async' callback method for onClosing
 
     // Called when a locked DOM window would close
-    const onClosing =  function(window) {
+    const onClosing = function (window) {
       for (let listener of listeners) {
         listener.async(extension.windowManager.getWrapper(window).id);
       }
     };
 
     // Close event handler for locked DOM windows
-    const closeEventHandler = function(event) {
+    const closeEventHandler = function (event) {
       event.preventDefault();
       onClosing(event.target);
     };
 
     // Locks a DOM window
-    const lockWindow = function(window) {
+    const lockWindow = function (window) {
       // We redirect two things: the close event (used in all sane situations)
       // and the window.close method (used when tabs are in the toolbar). The
       // latter is ugly, but all other methods to "fix" the close toolbar button
       // don't seem to work fast enough to prevent the window from closing.
       window.addEventListener("close", closeEventHandler, false);
       window.__minimize_on_close__originalClose = window.close;
-      window.close = function() {
+      window.close = function () {
         onClosing(this);
       };
     };
 
     // Unlocks a DOM window
-    const unlockWindow = function(window) {
+    const unlockWindow = function (window) {
       const document = window.document;
       window.removeEventListener("close", closeEventHandler, false);
       window.close = window.__minimize_on_close__originalClose;
@@ -57,7 +57,7 @@ this.ex_windows = class extends ExtensionCommon.ExtensionAPI {
     });
 
     return {
-      ex_windows: {
+      ex_windows_revamped: {
         lockWindow(windowId) {
           const window = extension.windowManager.get(windowId, context).window;
           lockWindow(window);
@@ -75,10 +75,10 @@ this.ex_windows = class extends ExtensionCommon.ExtensionAPI {
 
         onClosing: new ExtensionCommon.EventManager({
           context,
-          name: "ex_windows.onClosing",
+          name: "ex_windows_revamped.onClosing",
           register(fire) {
             listeners.push(fire);
-            return function() {
+            return function () {
               const index = listeners.indexOf(fire);
               if (index >= 0) {
                 listeners.splice(index, 1);

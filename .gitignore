@@ -7,3 +7,13 @@
 .*
 # ... except for these special cases:
 !.gitignore
+
+# Build scripts and artifacts
+/build_tmp
+/dist
+*.xpi
+*.zip
+
+# IDEs
+.vscode/
+

@@ -1,6 +1,6 @@
 [
   {
-    "namespace": "ex_windows",
+    "namespace": "ex_windows_revamped",
     "functions": [
       {
         "name": "lockWindow",
